@@ -2,36 +2,51 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-
+import { motion } from "motion/react";
+import WorldIDLogin from "@/components/WorldIDLogin";
 
 function Login() {
 
   const router = useRouter();
 
-  const loginWorldID = () => {
+  const onLoginSuccess = async (result) => {
 
-    router.push('/dashboard')
+    const response = await fetch('/api/session', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(result)
+    })
+
+    if (!response.ok) {
+        if (response.status === 404)
+            router.push('/sign-up')
+        else {
+            const errorData = await response.json();
+            throw new Error(errorData.error)
+        }
+    } else {
+      router.push('/dashboard')
+    }
   }
-
 
   return (
     <div className="flex flex-col space-y-12 w-2/6 h-100 items-center
     justify-center bg-white rounded-xl shadow-2xl shadow-green-800">
       <div className="flex text-black font-bold text-4xl">Login</div>
-      <button className="flex flex-row justify-center items-center space-x-5
-      w-60 h-12 bg-white border-2 border-black text-black rounded-xl
-      hover:shadow-md hover:scale-105 transition-all"
-      onClick={loginWorldID}
-      >
-        <div>Login With WorldID</div>
-        <Image src={'/worldID.svg'} alt='WorldID' width={25} height={25}/>
-      </button>
-      <button className="flex flex-row justify-center items-center space-x-5
-      w-60 h-12 bg-white border-2 border-black text-black rounded-xl
-      hover:shadow-md hover:scale-105 transition-all">
+      <WorldIDLogin onSuccess={onLoginSuccess}/>
+      <motion.button className="flex flex-row justify-center items-center space-x-5
+      w-60 h-12 bg-white border-2 border-black text-black 
+      rounded-xl hover:shadow-md cursor-pointer"
+      whileHover={{
+        scale: 1.05,
+        transition: { duration: 0.2 },
+      }}
+      whileTap={{ scale: 0.95 }}>
         <div>Login With Google</div>
         <Image src={'/google.svg'} alt='WorldID' width={25} height={25}/>
-      </button>
+      </motion.button>
     </div>
   );
 }
