@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { verifyCloudProof } from "@worldcoin/idkit-core/backend";
+import '../../../envConfig'
 
 export async function POST(request) {
     try {
@@ -7,8 +8,8 @@ export async function POST(request) {
         console.log("Received proof in API route:", proof);
         
         // Get environment variables with fallbacks
-        const app_id = process.env.NEXT_PUBLIC_WORLD_ID_APP_ID || "app_staging_338b219233c319fb6dd354f3919be66e";
-        const action = process.env.NEXT_PUBLIC_WORLD_ID_ACTION_ID || "vhack_action";
+        const app_id = process.env.NEXT_PUBLIC_WORLDID_APP_ID;
+        const action = process.env.NEXT_PUBLIC_WORLDID_ACTION_ID;
         
         try {
             const verifyRes = await verifyCloudProof(

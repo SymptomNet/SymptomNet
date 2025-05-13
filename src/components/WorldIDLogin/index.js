@@ -11,8 +11,11 @@ export default function WorldIDLogin({ onSuccess }) {
   const [error, setError] = useState(null);
 
   // App ID and action from environment variables (with fallbacks for development)
-  const app_id = process.env.NEXT_PUBLIC_WORLD_ID_APP_ID || "app_staging_338b219233c319fb6dd354f3919be66e";
-  const action = process.env.NEXT_PUBLIC_WORLD_ID_ACTION_ID || "vhack_action";
+  const app_id = process.env.NEXT_PUBLIC_WORLDID_APP_ID;
+  const action = process.env.NEXT_PUBLIC_WORLDID_ACTION_ID;
+
+  console.log(app_id)
+  console.log(action)
 
   const handleProof = async (result) => {
     try {
@@ -64,7 +67,6 @@ export default function WorldIDLogin({ onSuccess }) {
         verification_level={VerificationLevel.Device}
       >
         {({ open }) => (
-
           <motion.div
             className="flex flex-row justify-center items-center space-x-5
               w-60 h-12 bg-white border-2 border-black text-black 
