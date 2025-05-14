@@ -52,13 +52,25 @@ export default function Verify() {
     justify-center items-center">
       <div className="flex flex-row p-5 space-x-5 w-full h-[95%] items-center">
         <Sidebar />
-        <div className="flex flex-col w-full h-full space-x-5 ">
-          <div className="flex flex-col items-start w-full pt-2 px-5">
-            <div className="font-bold text-4xl">Verify</div>
-            <div className="py-4">Verify records made by other doctors, and get rewarded.</div>
-          </div>
-          <div className="w-full h-100 bg-white/5 rounded-xl mx-5">
-            NIgga!
+        <div className="flex flex-col w-full h-full space-x-5">
+          <div className="flex flex-col w-full h-full px-5">
+            <div className="flex flex-col items-start w-full pt-2">
+              <div className="font-bold text-4xl">Verify</div>
+              <div className="py-4">Verify records made by other doctors, and get rewarded.</div>
+            </div>
+            <div className="flex flex-row justify-start w-full h-150 bg-white/5 rounded-xl pl-7 py-5">
+              <div className="flex flex-col w-96 justify-start p-5">
+                <div className="font-bold text-2xl">Patient Details</div>
+              </div>
+              <div className="w-1 h-full bg-white rounded-xl mx-5"/>
+              <div className="flex flex-col w-96 justify-start p-5">
+                <div className="font-bold text-2xl">Illness Details</div>
+              </div>
+              <div className="w-1 h-full bg-white rounded-xl mx-5"/>
+              <div className="flex flex-col w-96 justify-start p-5">
+                <div className="font-bold text-2xl">Hospital Details</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

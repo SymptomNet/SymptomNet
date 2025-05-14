@@ -29,7 +29,7 @@ function Login() {
 
   return (
     <div className="flex flex-col space-y-12 w-2/6 h-64 items-center
-    justify-center bg-[#d2e8da]/50 rounded-xl shadow-2xl/50 shadow-[#24fc6f]">
+    justify-center bg-white/5 rounded-xl shadow-2xl/20 shadow-[#24fc6f]">
       <div className="flex text-white font-semibold text-4xl">Login</div>
       <WorldIDLogin onSuccess={onLoginSuccess}/>
     </div>

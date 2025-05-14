@@ -37,7 +37,7 @@ function ResultBox({ text , rank }) {
 function SymptomBox({ text, onDelete, onChange }) {
   return (
     <motion.div className="relative flex items-center justify-start px-2 py-3
-    w-full min-h-28 bg-[#d2e8da] rounded-xl"
+    w-full min-h-28 bg-white/5 rounded-xl"
     initial={{
       opacity: 0,
       translateX: -200,
@@ -50,7 +50,7 @@ function SymptomBox({ text, onDelete, onChange }) {
       opacity: 0,
     }}
     >
-      <textarea className="w-[80%] min-h-22 h-full text-black p-2 focus:outline-none"
+      <textarea className="w-[80%] min-h-22 h-full text-white p-2 focus:outline-none"
       defaultValue={text}
       placeholder="My patient is..."
       onChange={(e) => onChange(e.target.value)}
