@@ -29,7 +29,7 @@ function Login() {
 
   return (
     <div className="flex flex-col space-y-12 w-2/6 h-100 items-center
-    justify-center bg-white rounded-xl shadow-2xl shadow-green-800">
+    justify-center bg-white rounded-xl shadow-2xl/50 shadow-[#24fc6f]">
       <div className="flex text-black font-bold text-4xl">Login</div>
       <WorldIDLogin onSuccess={onLoginSuccess}/>
       <motion.button className="flex flex-row justify-center items-center space-x-5
@@ -49,7 +49,7 @@ function Login() {
 
 export default function Home() {
   return (
-    <div className="flex flex-col h-screen w-screen bg-[#1E2922]
+    <div className="flex flex-col h-screen w-screen bg-[#040c07]
     justify-center items-center">
       <div className="flex flex-row w-full justify-evenly items-center">
         <Login />

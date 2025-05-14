@@ -8,8 +8,8 @@ import { use, useEffect, useState } from "react";
 function ResultBox({ text , rank }) {
 
   return (
-    <motion.div className="flex flex-row items-center justify-start p-5
-    w-full min-h-28 bg-white rounded-xl space-x-8"
+    <motion.div className="group flex flex-row items-center justify-start p-5
+    w-full min-h-28 bg-[#0f983e]/40 rounded-xl space-x-8"
     initial={{
       opacity: 0,
       translateX: -200,
@@ -22,10 +22,11 @@ function ResultBox({ text , rank }) {
       opacity: 0,
     }}
     >
-      <div className="text-[#1f7a42] font-bold text-5xl pl-5">
+      <div className="text-[#24fc6f] font-bold text-5xl pl-5
+      group-hover:scale-125 transition-all">
         {rank}
       </div>
-      <div className="text-black text-xl">
+      <div className="text-white text-xl">
         {text}
       </div>
     </motion.div>
@@ -36,7 +37,7 @@ function ResultBox({ text , rank }) {
 function SymptomBox({ text, onDelete, onChange }) {
   return (
     <motion.div className="relative flex items-center justify-start px-2 py-3
-    w-full min-h-28 bg-white rounded-xl"
+    w-full min-h-28 bg-[#d2e8da] rounded-xl"
     initial={{
       opacity: 0,
       translateX: -200,
@@ -54,10 +55,10 @@ function SymptomBox({ text, onDelete, onChange }) {
       placeholder="My patient is..."
       onChange={(e) => onChange(e.target.value)}
       ></textarea>
-      <div className="absolute top-3 right-3 cursor-pointer hover:scale-105"
+      <div className="absolute top-3 right-3 cursor-pointer hover:rotate-180 transition-all"
       onClick={onDelete}
       >
-        <X color="red" size={32} className=" "/>
+        <X color="red" size={35} className=" "/>
       </div>
     </motion.div>
   );
@@ -104,7 +105,7 @@ export default function Diagnose() {
   }
 
   return (
-  <div className="flex flex-col h-screen w-screen bg-[#1E2922]
+  <div className="flex flex-col h-screen w-screen bg-[#040c07]
   justify-center items-center">
     <div className="flex flex-row p-5 space-x-5 w-full h-[95%] items-center">
     <Sidebar />
@@ -113,8 +114,8 @@ export default function Diagnose() {
         <div className="flex flex-col w-full h-full justify-start">
           <div className="flex flex-row justify-between items-start w-full pt-2">
             <div className="font-bold text-4xl">Symptoms</div>
-            <motion.button className="h-10 w-18 rounded-xl text-white font-bold
-            bg-[#1f7a42]"
+            <motion.button className="h-10 w-18 rounded-xl text-black font-bold
+            bg-[#8de9ad]"
             whileHover={{
             scale: 1.1,
             boxShadow: "0 0px 30px rgba(22, 101, 52, 0.5)",
@@ -126,7 +127,7 @@ export default function Diagnose() {
               Add
             </motion.button>
           </div>
-          <div className="pt-2">Describe your patient's symptoms below.</div>
+          <div className="pt-2 pb-6">Describe your patient's symptoms below.</div>
           <div className="flex flex-col max-h-full space-y-5 py-5">
             <AnimatePresence mode="sync">
               {
@@ -137,7 +138,7 @@ export default function Diagnose() {
         </div>
 
       <motion.button className="h-16 w-full rounded-xl text-black font-bold text-2xl
-        bg-[#9ad6b0]"
+        bg-[#8de9ad]"
       whileHover={{
       scale: 1.05,
       boxShadow: "0 0px 30px rgba(22, 101, 52, 0.5)",
