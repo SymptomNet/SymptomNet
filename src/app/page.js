@@ -28,21 +28,10 @@ function Login() {
   }
 
   return (
-    <div className="flex flex-col space-y-12 w-2/6 h-100 items-center
-    justify-center bg-white rounded-xl shadow-2xl/50 shadow-[#24fc6f]">
-      <div className="flex text-black font-bold text-4xl">Login</div>
+    <div className="flex flex-col space-y-12 w-2/6 h-64 items-center
+    justify-center bg-[#d2e8da]/50 rounded-xl shadow-2xl/50 shadow-[#24fc6f]">
+      <div className="flex text-white font-semibold text-4xl">Login</div>
       <WorldIDLogin onSuccess={onLoginSuccess}/>
-      <motion.button className="flex flex-row justify-center items-center space-x-5
-      w-60 h-12 bg-white border-2 border-black text-black 
-      rounded-xl hover:shadow-md cursor-pointer"
-      whileHover={{
-        scale: 1.05,
-        transition: { duration: 0.2 },
-      }}
-      whileTap={{ scale: 0.95 }}>
-        <div>Login With Google</div>
-        <Image src={'/google.svg'} alt='WorldID' width={25} height={25}/>
-      </motion.button>
     </div>
   );
 }
@@ -51,7 +40,8 @@ export default function Home() {
   return (
     <div className="flex flex-col h-screen w-screen bg-[#040c07]
     justify-center items-center">
-      <div className="flex flex-row w-full justify-evenly items-center">
+      <div className="flex flex-col w-full justify-evenly items-center">
+        <div className="pb-12 text-5xl font-bold">SymptomNet</div>
         <Login />
       </div>
     </div>

@@ -127,7 +127,7 @@ export default function Diagnose() {
               Add
             </motion.button>
           </div>
-          <div className="pt-2 pb-6">Describe your patient's symptoms below.</div>
+          <div className="pt-4 pb-6">Describe your patient's symptoms below.</div>
           <div className="flex flex-col max-h-full space-y-5 py-5">
             <AnimatePresence mode="sync">
               {
@@ -154,7 +154,7 @@ export default function Diagnose() {
         <div className="flex flex-row justify-between items-start w-full pt-2">
           <div className="font-bold text-4xl">Diagnosis</div>
         </div>
-        <div className="pt-2">
+        <div className="pt-4">
           Our AI will attempt to diagnose your patient's disease, based on the
           symptoms described by you.
         </div>

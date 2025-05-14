@@ -52,7 +52,7 @@ export default function WorldIDLogin({ onSuccess }) {
   if (verified) {
     return (
       <div className="text-green-600 font-semibold">
-        ✓ Identity verified! You can now apply for a microloan.
+        ✓ Identity verified!
       </div>
     );
   }
@@ -69,10 +69,10 @@ export default function WorldIDLogin({ onSuccess }) {
         {({ open }) => (
           <motion.div
             className="flex flex-row justify-center items-center space-x-5
-              w-60 h-12 bg-white border-2 border-black text-black 
-              rounded-xl hover:shadow-md cursor-pointer"
+              w-64 h-12 bg-[#8de9ad] text-black shadow-lg
+              rounded-xl cursor-pointer hover:shadow-[0_0px_30px_rgba(141,233,173,1)] transition-shadow"
             whileHover={{
-              scale: 1.05,
+              translateY: -10,
               transition: { duration: 0.2 },
             }}
             whileTap={{ scale: 0.95 }}
