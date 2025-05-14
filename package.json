@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@next/env": "^15.3.2",
-    "@worldcoin/idkit": "^2.1.0",
+    "@worldcoin/idkit": "^1.2.2",
     "lucide-react": "^0.510.0",
     "motion": "^12.11.0",
     "next": "15.3.2",

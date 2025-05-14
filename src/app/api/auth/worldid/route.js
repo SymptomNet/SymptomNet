@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { verifyCloudProof } from "@worldcoin/idkit-core/backend";
-import '../../../envConfig'
 
 export async function POST(request) {
     try {

@@ -20,12 +20,8 @@ function Login() {
     })
 
     if (!response.ok) {
-        if (response.status === 404)
-            router.push('/sign-up')
-        else {
-            const errorData = await response.json();
-            throw new Error(errorData.error)
-        }
+      const errorData = await response.json();
+      throw new Error(errorData.error)
     } else {
       router.push('/dashboard')
     }

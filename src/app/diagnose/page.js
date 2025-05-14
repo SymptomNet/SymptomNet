@@ -76,7 +76,7 @@ export default function Diagnose() {
           </motion.button>
         </div>
         <div>Describe your patient's symptoms below.</div>
-        <div className="flex flex-col space-y-5 py-5">
+        <div className="flex flex-col max-h-full space-y-5 py-5">
           <AnimatePresence mode="sync">
             {
               symptoms.map((s) => <SymptomBox key={s.id} text={s.text} onDelete={deleteSymptom(s.id)} onChange={updateSymptomText(s.id)}/>)
