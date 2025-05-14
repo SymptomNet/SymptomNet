@@ -1,0 +1,861 @@
+{
+  "address": "Ec7Kh2XjSRgXkJfrvcCpSuAqd4d4sQToqisjP39Td12Z",
+  "metadata": {
+    "name": "symptom_net",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "get_all_doctors",
+      "discriminator": [
+        206,
+        91,
+        230,
+        180,
+        233,
+        224,
+        194,
+        248
+      ],
+      "accounts": [
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "state",
+          "writable": true
+        },
+        {
+          "name": "doctor_list",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  111,
+                  99,
+                  116,
+                  111,
+                  114,
+                  45,
+                  108,
+                  105,
+                  115,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "user"
+              }
+            ]
+          }
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "max_results",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "get_all_records",
+      "discriminator": [
+        58,
+        99,
+        38,
+        161,
+        236,
+        175,
+        71,
+        57
+      ],
+      "accounts": [
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "state",
+          "writable": true
+        },
+        {
+          "name": "record_counter",
+          "writable": true
+        },
+        {
+          "name": "record_list",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  99,
+                  111,
+                  114,
+                  100,
+                  45,
+                  108,
+                  105,
+                  115,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "user"
+              }
+            ]
+          }
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "max_results",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "get_doctor_stats",
+      "discriminator": [
+        98,
+        141,
+        31,
+        80,
+        168,
+        237,
+        65,
+        184
+      ],
+      "accounts": [
+        {
+          "name": "doctor",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "doctor_account",
+          "writable": true
+        },
+        {
+          "name": "stats",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  111,
+                  99,
+                  116,
+                  111,
+                  114,
+                  45,
+                  115,
+                  116,
+                  97,
+                  116,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "doctor_account.wallet",
+                "account": "Doctor"
+              }
+            ]
+          }
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "get_record_status",
+      "discriminator": [
+        253,
+        24,
+        251,
+        194,
+        45,
+        191,
+        181,
+        151
+      ],
+      "accounts": [
+        {
+          "name": "doctor",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "record",
+          "writable": true
+        },
+        {
+          "name": "status",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  99,
+                  111,
+                  114,
+                  100,
+                  45,
+                  115,
+                  116,
+                  97,
+                  116,
+                  117,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "record.id",
+                "account": "Record"
+              }
+            ]
+          }
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "initialize",
+      "discriminator": [
+        175,
+        175,
+        109,
+        31,
+        13,
+        152,
+        155,
+        237
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "record_counter",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  99,
+                  111,
+                  114,
+                  100,
+                  95,
+                  99,
+                  111,
+                  117,
+                  110,
+                  116,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "token_mint",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  83,
+                  89,
+                  77,
+                  80,
+                  84
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "register_doctor",
+      "discriminator": [
+        181,
+        67,
+        216,
+        215,
+        132,
+        240,
+        147,
+        125
+      ],
+      "accounts": [
+        {
+          "name": "doctor_wallet",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "doctor_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  111,
+                  99,
+                  116,
+                  111,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "doctor_wallet"
+              }
+            ]
+          }
+        },
+        {
+          "name": "doctor_token_account",
+          "writable": true
+        },
+        {
+          "name": "token_mint",
+          "writable": true
+        },
+        {
+          "name": "state",
+          "writable": true
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "submit_record",
+      "discriminator": [
+        228,
+        62,
+        113,
+        235,
+        20,
+        182,
+        203,
+        101
+      ],
+      "accounts": [
+        {
+          "name": "doctor",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "doctor_account",
+          "writable": true
+        },
+        {
+          "name": "state",
+          "writable": true
+        },
+        {
+          "name": "record_counter",
+          "writable": true
+        },
+        {
+          "name": "record",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  99,
+                  111,
+                  114,
+                  100
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "record_counter.counter",
+                "account": "RecordCounter"
+              },
+              {
+                "kind": "account",
+                "path": "doctor"
+              }
+            ]
+          }
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "sickness",
+          "type": "string"
+        },
+        {
+          "name": "symptoms",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "verify_record",
+      "discriminator": [
+        95,
+        2,
+        230,
+        207,
+        188,
+        217,
+        145,
+        202
+      ],
+      "accounts": [
+        {
+          "name": "doctor",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "doctor_account",
+          "writable": true
+        },
+        {
+          "name": "submitter_account",
+          "writable": true
+        },
+        {
+          "name": "record",
+          "writable": true
+        },
+        {
+          "name": "state",
+          "writable": true
+        },
+        {
+          "name": "token_mint",
+          "writable": true
+        },
+        {
+          "name": "doctor_token_account",
+          "writable": true
+        },
+        {
+          "name": "submitter_token_account",
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Doctor",
+      "discriminator": [
+        162,
+        178,
+        42,
+        216,
+        185,
+        32,
+        68,
+        183
+      ]
+    },
+    {
+      "name": "DoctorList",
+      "discriminator": [
+        157,
+        26,
+        44,
+        31,
+        181,
+        23,
+        38,
+        252
+      ]
+    },
+    {
+      "name": "DoctorStats",
+      "discriminator": [
+        218,
+        31,
+        190,
+        17,
+        143,
+        81,
+        10,
+        101
+      ]
+    },
+    {
+      "name": "Record",
+      "discriminator": [
+        254,
+        233,
+        117,
+        252,
+        76,
+        166,
+        146,
+        139
+      ]
+    },
+    {
+      "name": "RecordCounter",
+      "discriminator": [
+        58,
+        105,
+        93,
+        205,
+        219,
+        64,
+        237,
+        92
+      ]
+    },
+    {
+      "name": "RecordList",
+      "discriminator": [
+        202,
+        111,
+        125,
+        24,
+        231,
+        57,
+        78,
+        0
+      ]
+    },
+    {
+      "name": "RecordStatus",
+      "discriminator": [
+        248,
+        103,
+        218,
+        152,
+        45,
+        65,
+        192,
+        2
+      ]
+    },
+    {
+      "name": "SymptomNetState",
+      "discriminator": [
+        233,
+        145,
+        180,
+        0,
+        198,
+        172,
+        202,
+        77
+      ]
+    }
+  ],
+  "types": [
+    {
+      "name": "Doctor",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "contribution_score",
+            "type": "u64"
+          },
+          {
+            "name": "records_submitted",
+            "type": "u64"
+          },
+          {
+            "name": "records_verified",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "DoctorList",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "total",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "DoctorStats",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "contribution_score",
+            "type": "u64"
+          },
+          {
+            "name": "records_submitted",
+            "type": "u64"
+          },
+          {
+            "name": "records_verified",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Record",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "id",
+            "type": "u64"
+          },
+          {
+            "name": "sickness",
+            "type": "string"
+          },
+          {
+            "name": "symptoms",
+            "type": "string"
+          },
+          {
+            "name": "submitter",
+            "type": "pubkey"
+          },
+          {
+            "name": "status",
+            "type": "string"
+          },
+          {
+            "name": "verification_count",
+            "type": "u64"
+          },
+          {
+            "name": "verifier_1",
+            "type": "pubkey"
+          },
+          {
+            "name": "verifier_2",
+            "type": "pubkey"
+          },
+          {
+            "name": "verifier_3",
+            "type": "pubkey"
+          },
+          {
+            "name": "has_verifier_1",
+            "type": "bool"
+          },
+          {
+            "name": "has_verifier_2",
+            "type": "bool"
+          },
+          {
+            "name": "has_verifier_3",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RecordCounter",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "counter",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RecordList",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "total",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RecordStatus",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "status",
+            "type": "string"
+          },
+          {
+            "name": "verification_count",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SymptomNetState",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "token_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "total_records",
+            "type": "u64"
+          },
+          {
+            "name": "total_doctors",
+            "type": "u64"
+          }
+        ]
+      }
+    }
+  ]
+}

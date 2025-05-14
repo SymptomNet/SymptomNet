@@ -20,6 +20,7 @@ export async function POST(request) {
             console.log("Verification result:", verifyRes);
             
             if (verifyRes.success) {
+                console.log(verifyRes.nullifier_hash)
                 return NextResponse.json({
                     success: true,
                     message: "User verified successfully!",
