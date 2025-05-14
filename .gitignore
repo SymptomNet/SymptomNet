@@ -42,4 +42,6 @@ next-env.d.ts
 
 # dont push package-lock.json thanks
 package-lock.json
+
+# personal stuff
 /**/scripts
