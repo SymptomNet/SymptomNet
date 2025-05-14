@@ -64,7 +64,7 @@ function RecordTable() {
 
   return (
     <div className="flex flex-col w-full h-full justify-between">
-      <div className="w-full h-172 p-5 bg-white/5 rounded-md justify-between">
+      <div className="w-full h-172 p-5 bg-white/5 rounded-xl justify-between">
         <div className="flex flex-col w-full h-full justify-start">
           <div className="grid grid-cols-5 place-items-center">
             <div className="col-span-1">Created</div>
