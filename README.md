@@ -1,4 +1,4 @@
-# Megahack-2025
+# SymptomNet
 
 SymptomNet is a revolutionary healthcare platform that combines blockchain technology with advanced AI to democratize medical diagnostics globally.
 
@@ -11,3 +11,10 @@ Users subscribe to SymptomNet's AI service to receive preliminary diagnostic ins
 The platform bridges geographical healthcare disparities while incentivizing medical knowledge sharing through blockchain technology.
 
 ---
+
+# Authors
+
+- Derek Goh
+- Tan Lai An
+- Chua Shi Xiang
+- Chee Min Hao
