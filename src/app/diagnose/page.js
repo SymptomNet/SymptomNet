@@ -1,33 +1,60 @@
 "use client"
 
 import { X } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react"
+import { motion, AnimatePresence, hover } from "motion/react"
 import Sidebar from "@/components/Sidebar";
 import { use, useEffect, useState } from "react";
+import useMeasure from "react-use-measure";
 
-function ResultBox({ text , rank }) {
+function ResultBox({ text , rank, treatment_steps }) {
+
+  const [hovered, setHovered] = useState(false);
+
+  const [ref, { height }] = useMeasure()
 
   return (
-    <motion.div className="group flex flex-row items-center justify-start p-5
-    w-full min-h-28 bg-[#0f983e]/40 rounded-xl space-x-8"
-    initial={{
-      opacity: 0,
-      translateX: -200,
-    }}
-    animate={{
-      opacity: 1,
-      translateX: 0,
-    }}
-    exit={{
-      opacity: 0,
-    }}
-    >
-      <div className="text-[#24fc6f] font-bold text-5xl pl-5
-      group-hover:scale-125 transition-all">
-        {rank}
-      </div>
-      <div className="text-white text-xl">
-        {text}
+    <motion.div className="overflow-hidden"
+      initial={{
+        opacity: 0,
+        translateX: -200,
+      }}
+      animate={{
+        opacity: 1,
+        translateX: 0,
+        height: height
+      }}
+      exit={{
+        opacity: 0,
+      }}
+      onHoverStart={() => setHovered(true)}
+      onHoverEnd={() => setHovered(false)}
+      >
+      <div ref={ref} className="group flex flex-col w-full min-h-28 p-5
+        bg-[#0f983e]/40 rounded-xl space-x-8 justify-center">
+        <div className="flex flex-row items-center justify-start space-x-8">
+          <div className="text-[#24fc6f] font-bold text-5xl pl-5
+          group-hover:scale-125 transition-all">
+            {rank}
+          </div>
+          <div className="text-white text-xl">
+            {text}
+          </div>
+        </div>
+        {
+          hovered && <motion.div
+            initial={{ opacity: 0, translateY: -10 }}
+            animate={{ opacity: 1, translateY: 0 }}
+            exit={{ opacity: 0, translateY: -10 }}
+            transition={{ duration: 0.3 }}
+            >
+              <div className="text-white text-xl font-bold p-5">Diagnosis Plan</div>
+              <ol className="list-decimal list-outside text-white pl-10 space-y-2">
+              {
+                treatment_steps.map((t, i) => <li key={i}>{t}</li>)
+              }
+              </ol>
+          </motion.div>
+        }
       </div>
     </motion.div>
   )
@@ -38,6 +65,7 @@ function SymptomBox({ text, onDelete, onChange }) {
   return (
     <motion.div className="relative flex items-center justify-start px-2 py-3
     w-full min-h-28 bg-white/5 rounded-xl"
+    layout
     initial={{
       opacity: 0,
       translateX: -200,
@@ -68,8 +96,15 @@ export default function Diagnose() {
 
   const [symptoms, setSymptoms] = useState([]);
   const [results, setResults] = useState([
-    { id: 0, rank: 1, text: 'flu'},
-    { id: 1, rank: 2, text: 'brain problem'}
+    { id: 0, rank: 1, text: 'Common Rash', treatment_steps: [
+      "Conduct a visual examination to identify the rash's appearance, distribution, and any associated skin changes.",
+      "Gather information about the patient's medical history, including allergies, medications, and previous skin conditions.",
+      "Inquire about potential exposures to irritants, allergens, or infectious agents.",
+      "Assess for accompanying symptoms such as itching, pain, fever, or systemic illness.",
+      "Perform diagnostic tests, such as skin scrapings, cultures, or biopsies, if necessary, to rule out specific infections or conditions.",
+      "Consider less common conditions based on your findings."
+    ]},
+    { id: 1, rank: 2, text: 'brain problem' , treatment_steps: ['baba']}
   ]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -85,7 +120,7 @@ export default function Diagnose() {
 
     setIsLoading(true);
 
-    fetch('https://railway.com/bababaaba', {
+    fetch('http://localhost:5000/predict', {
       method: 'GET',
       body: {
 
@@ -165,9 +200,13 @@ export default function Diagnose() {
         }
         {
           isLoading === false && results.length > 0 && <div className="flex flex-col max-h-full space-y-5 py-5">
-            {
-              results.map((r, i) => <ResultBox key={r.id} text={r.text} rank={r.rank}/>)
-            }
+            <AnimatePresence mode="sync">
+              {
+                
+                results.map((r, i) => <ResultBox key={r.id} text={r.text}
+                rank={r.rank} treatment_steps={r.treatment_steps}/>)
+              }
+            </AnimatePresence>
           </div>
         }
         {
