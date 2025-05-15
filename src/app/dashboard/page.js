@@ -57,19 +57,19 @@ function AddRecordDialog({ onOpenChange }) {
             <div className="text-xl font-semibold">Patient Details</div>
             <div className="space-y-1">
               <div className="text-lg pl-2">Age</div>
-              <input className="bg-white/5 text-black w-96 h-12 p-5 rounded-lg inset-shadow-sm"/>
+              <input className="bg-white/5 text-white w-96 h-12 p-5 rounded-lg inset-shadow-sm"/>
             </div>
             <div className="space-y-1">
               <div className="text-lg pl-2">Gender</div>
-              <input className="bg-white/5 text-black w-96 h-12 p-5 rounded-lg inset-shadow-sm"/>
+              <input className="bg-white/5 text-white w-96 h-12 p-5 rounded-lg inset-shadow-sm"/>
             </div>
             <div className="space-y-1">
               <div className="text-lg pl-2">Race</div>
-              <input className="bg-white/5 text-black w-96 h-12 p-5 rounded-lg inset-shadow-sm"/>
+              <input className="bg-white/5 text-white w-96 h-12 p-5 rounded-lg inset-shadow-sm"/>
             </div>
             <div className="space-y-1">
               <div className="text-lg pl-2">Country</div>
-              <input className="bg-white/5 text-black w-96 h-12 p-5 rounded-lg inset-shadow-sm"/>
+              <input className="bg-white/5 text-white w-96 h-12 p-5 rounded-lg inset-shadow-sm"/>
             </div>
             <div className="space-y-1">
               <div className="text-lg pl-2">Date Admitted</div>
@@ -84,12 +84,12 @@ function AddRecordDialog({ onOpenChange }) {
             <div className="text-xl font-semibold">Illness Details</div>
             <div className="space-y-1">
               <div className="text-lg pl-2">Diagnosis</div>
-              <input className="bg-white/5 text-black w-96 h-12 p-5 rounded-lg inset-shadow-sm"/>
+              <input className="bg-white/5 text-white w-96 h-12 p-5 rounded-lg inset-shadow-sm"/>
             </div>
             <div className="space-y-1">
               <div className="flex flex-row justify-between pb-2">
                 <div className="text-lg pl-2">Symptoms</div>
-                <motion.div className="flex h-8 w-8 rounded-lg text-black 
+                <motion.div className="flex h-8 w-8 rounded-lg text-white 
               bg-[#8de9ad] justify-center items-center"
                 whileHover={{
                 scale: 1.1,
@@ -115,15 +115,15 @@ function AddRecordDialog({ onOpenChange }) {
             <div className="text-xl font-semibold">Hospital Details</div>
             <div className="space-y-1">
               <div className="text-lg pl-2">Hospital Name</div>
-              <input className="bg-white/5 text-black w-96 h-12 p-5 rounded-lg inset-shadow-sm"/>
+              <input className="bg-white/5 text-white w-96 h-12 p-5 rounded-lg inset-shadow-sm"/>
             </div>
             <div className="space-y-1">
               <div className="text-lg pl-2">State</div>
-              <input className="bg-white/5 text-black w-96 h-12 p-5 rounded-lg inset-shadow-sm"/>
+              <input className="bg-white/5 text-white w-96 h-12 p-5 rounded-lg inset-shadow-sm"/>
             </div>
             <div className="space-y-1">
               <div className="text-lg pl-2">Country</div>
-              <input className="bg-white/5 text-black w-96 h-12 p-5 rounded-lg inset-shadow-sm"/>
+              <input className="bg-white/5 text-white w-96 h-12 p-5 rounded-lg inset-shadow-sm"/>
             </div>
           </div>
 
