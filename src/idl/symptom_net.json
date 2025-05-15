@@ -1,7 +1,7 @@
 {
-  "address": "Ec7Kh2XjSRgXkJfrvcCpSuAqd4d4sQToqisjP39Td12Z",
+  "address": "BqRrKSm8bYvHMqyYjrL4WiC13JKL89VYFm8TV7QXaFWN",
   "metadata": {
-    "name": "symptom_net",
+    "name": "symptom_net_contract",
     "version": "0.1.0",
     "spec": "0.1.0",
     "description": "Created with Anchor"
@@ -421,7 +421,32 @@
         },
         {
           "name": "doctor_token_account",
-          "writable": true
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  111,
+                  99,
+                  116,
+                  111,
+                  114,
+                  45,
+                  116,
+                  111,
+                  107,
+                  101,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "doctor_wallet"
+              }
+            ]
+          }
         },
         {
           "name": "token_mint",
@@ -438,6 +463,39 @@
         {
           "name": "system_program",
           "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "reset_record_count",
+      "discriminator": [
+        98,
+        163,
+        119,
+        125,
+        67,
+        114,
+        74,
+        202
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "state",
+          "writable": true
+        },
+        {
+          "name": "record_counter",
+          "writable": true
         }
       ],
       "args": []
@@ -490,12 +548,13 @@
               },
               {
                 "kind": "account",
-                "path": "record_counter.counter",
-                "account": "RecordCounter"
+                "path": "state.authority",
+                "account": "SymptomNetState"
               },
               {
                 "kind": "account",
-                "path": "doctor"
+                "path": "record_counter.counter",
+                "account": "RecordCounter"
               }
             ]
           }
@@ -516,6 +575,10 @@
         },
         {
           "name": "symptoms",
+          "type": "string"
+        },
+        {
+          "name": "treatment",
           "type": "string"
         }
       ]
@@ -789,6 +852,10 @@
           {
             "name": "has_verifier_3",
             "type": "bool"
+          },
+          {
+            "name": "treatment",
+            "type": "string"
           }
         ]
       }

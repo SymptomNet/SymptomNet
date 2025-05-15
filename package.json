@@ -14,6 +14,7 @@
     "@solana/spl-token": "^0.4.13",
     "@solana/web3.js": "^1.98.2",
     "@worldcoin/idkit": "^1.2.2",
+    "iron-session": "^8.0.4",
     "lucide-react": "^0.510.0",
     "mongoose": "^8.14.3",
     "motion": "^12.11.0",

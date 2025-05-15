@@ -2,12 +2,12 @@
  * Program IDL in camelCase format in order to be used in JS/TS.
  *
  * Note that this is only a type helper and is not the actual IDL. The original
- * IDL can be found at `target/idl/symptom_net.json`.
+ * IDL can be found at `target/idl/symptom_net_contract.json`.
  */
-export type SymptomNet = {
-  "address": "Ec7Kh2XjSRgXkJfrvcCpSuAqd4d4sQToqisjP39Td12Z",
+export type SymptomNetContract = {
+  "address": "BqRrKSm8bYvHMqyYjrL4WiC13JKL89VYFm8TV7QXaFWN",
   "metadata": {
-    "name": "symptomNet",
+    "name": "symptomNetContract",
     "version": "0.1.0",
     "spec": "0.1.0",
     "description": "Created with Anchor"
@@ -427,7 +427,32 @@ export type SymptomNet = {
         },
         {
           "name": "doctorTokenAccount",
-          "writable": true
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  111,
+                  99,
+                  116,
+                  111,
+                  114,
+                  45,
+                  116,
+                  111,
+                  107,
+                  101,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "doctorWallet"
+              }
+            ]
+          }
         },
         {
           "name": "tokenMint",
@@ -444,6 +469,39 @@ export type SymptomNet = {
         {
           "name": "systemProgram",
           "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "tokenProgram",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "resetRecordCount",
+      "discriminator": [
+        98,
+        163,
+        119,
+        125,
+        67,
+        114,
+        74,
+        202
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "state",
+          "writable": true
+        },
+        {
+          "name": "recordCounter",
+          "writable": true
         }
       ],
       "args": []
@@ -496,12 +554,13 @@ export type SymptomNet = {
               },
               {
                 "kind": "account",
-                "path": "record_counter.counter",
-                "account": "recordCounter"
+                "path": "state.authority",
+                "account": "symptomNetState"
               },
               {
                 "kind": "account",
-                "path": "doctor"
+                "path": "record_counter.counter",
+                "account": "recordCounter"
               }
             ]
           }
@@ -522,6 +581,10 @@ export type SymptomNet = {
         },
         {
           "name": "symptoms",
+          "type": "string"
+        },
+        {
+          "name": "treatment",
           "type": "string"
         }
       ]
@@ -795,6 +858,10 @@ export type SymptomNet = {
           {
             "name": "hasVerifier3",
             "type": "bool"
+          },
+          {
+            "name": "treatment",
+            "type": "string"
           }
         ]
       }

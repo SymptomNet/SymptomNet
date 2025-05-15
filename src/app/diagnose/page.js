@@ -2,7 +2,7 @@
 
 import { X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react"
-import Sidebar from "@/components/Sidebar";
+import Sidebar from "../../components/Sidebar";
 import { use, useEffect, useState } from "react";
 
 function ResultBox({ text , rank }) {

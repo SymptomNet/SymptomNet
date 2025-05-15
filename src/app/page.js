@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { motion } from "motion/react";
-import WorldIDLogin from "@/components/WorldIDLogin";
+import WorldIDLogin from "../components/WorldIDLogin";
 
 function Login() {
 

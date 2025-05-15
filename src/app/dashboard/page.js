@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "motion/react"
 
-import Sidebar from "@/components/Sidebar";
+import Sidebar from "../../components/Sidebar";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 function RecordEntry({ date, illness, verify_percentage, status}) {
