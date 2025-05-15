@@ -1,6 +1,6 @@
 "use client"
 
-import { X } from "lucide-react";
+import { Type, X } from "lucide-react";
 import { motion, AnimatePresence, hover } from "motion/react"
 import Sidebar from "@/components/Sidebar";
 import { use, useEffect, useState } from "react";
@@ -120,19 +120,21 @@ export default function Diagnose() {
 
     setIsLoading(true);
 
-    fetch('http://localhost:5000/predict', {
-      method: 'GET',
-      body: {
-
-      }
+    // replace this with localhost:5000
+    fetch('https://a316-202-171-178-0.ngrok-free.app/predict', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        Message: symptoms.map((s) => s.text).join('. ')
+      })
     }).then((response) => {
       if (response.ok)
         response.json().then((json) => {
-      
-            // put into results here
-
-            setResults([])
-            setIsLoading(false)
+          console.log(json.result)
+          setResults(json.result.map((r, i) => ({id: crypto.randomUUID(), rank: i + 1, text: r, treatment_steps: ['None']})))
+          setIsLoading(false)
         })
     }).catch((error) => {
       console.error(error)
