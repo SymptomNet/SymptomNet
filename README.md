@@ -1,38 +1,13 @@
-# Megahack-2025-Frontend
+# Megahack-2025
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+SymptomNet is a revolutionary healthcare platform that combines blockchain technology with advanced AI to democratize medical diagnostics globally.
 
-## Getting Started
+Our Solana-based smart contract allows medical professionals worldwide to submit and verify symptom-disease relationships, creating a secure, transparent database of medical knowledge. Doctors earn SYMPT tokens by contributing valuable records and verifying others' submissions, ensuring data quality through decentralized peer review.
 
-First, run the development server:
+This verified medical data trains our specialized agentic AI, which can interpret symptoms and suggest possible conditions based on knowledge from medical professionals across diverse geographical regions and specialties.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Users subscribe to SymptomNet's AI service to receive preliminary diagnostic insights by simply describing their symptoms, accessing a global knowledge base of medical expertise previously unavailable to most healthcare systems.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The platform bridges geographical healthcare disparities while incentivizing medical knowledge sharing through blockchain technology.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
