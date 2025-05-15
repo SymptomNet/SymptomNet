@@ -21,6 +21,7 @@ function AddRecordDialog({ onOpenChange }) {
 
   const [admissionDate, setAdmissionDate] = useState(new Date());
   const [dischargeDate, setDischargeDate] = useState(new Date());
+  const [sickness, setSickness] = useState("")
   const [symptoms, setSymptoms] = useState([])
 
   const deleteSymptom = (id) => () => setSymptoms(symptoms => symptoms.filter(s => s.id !== id));
@@ -84,7 +85,9 @@ function AddRecordDialog({ onOpenChange }) {
             <div className="text-xl font-semibold">Illness Details</div>
             <div className="space-y-1">
               <div className="text-lg pl-2">Diagnosis</div>
-              <input className="bg-white/5 text-white w-96 h-12 p-5 rounded-lg inset-shadow-sm"/>
+              <input className="bg-white/5 text-white w-96 h-12 p-5 rounded-lg inset-shadow-sm"
+                onChange={(e) => setSickness(e.target.value)}
+              />
             </div>
             <div className="space-y-1">
               <div className="flex flex-row justify-between pb-2">
@@ -137,7 +140,16 @@ function AddRecordDialog({ onOpenChange }) {
         transition: { duration: 0.2 },
         }}
         whileTap={{scale: 0.9}}
-        onClick={() => {}}
+        onClick={() => {
+          fetch('/api/record', {
+            method: 'POST',
+            body: JSON.stringify({
+              sickness: sickness,
+              symptoms: symptoms.map(x => x.text).join(","),
+              treatment: "Drink warm warm water"
+            })
+          }).then(() => window.location.reload())
+        }}
         >
           Add
         </motion.div>

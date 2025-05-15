@@ -32,9 +32,10 @@ const exampleLong = {
     status: 'Recovered'
   },
   illness: {
-    name: "Covid-19",
+    name: "",
     symptoms: [
-      "Cough", "Sore Throat", "Fever"
+    ],
+    treatment: [
     ]
   },
   treatment: [
@@ -48,12 +49,30 @@ const exampleLong = {
 }
 
 export default function Verify() {
-
+  const [id, setID] = useState(-1)
   const [data, setData] = useState({})
 
   useEffect(() => {
     setData(exampleLong)
     console.log(data)
+  }, [])
+
+  useEffect(() => {
+    fetch(`/api/verify`).then((e) => e.json()).then((obj) => {
+      const { data } = obj
+      console.log(data)
+      setID(Number(data.id))
+      setData(Object.assign(exampleLong, {
+        id: Number(data.id),
+        date: new Date(data.date),
+        illness: {
+          name: data.sickness,
+          symptoms: data.symptoms.split(","),
+          treatment: data.treatment.split(","),
+        },
+      }))
+      console.log(data)
+    })
   }, [])
 
   return (
@@ -89,6 +108,12 @@ export default function Verify() {
                       data.illness?.symptoms.map((s, i) => <li key={i}>{s}</li>)
                     }
                   </ul>
+                  <div>Treatment:</div>
+                  <ul className="list-disc list-inside pl-5 space-y-2">
+                    {
+                      data.illness?.treatment.map((d, i) => <li key={i}>{d}</li>)
+                    }
+                  </ul>
                 </div>
               </div>
               <div className="flex flex-col w-1/3 bg-white/5 rounded-xl justify-start p-5">
@@ -109,7 +134,11 @@ export default function Verify() {
                 transition: { duration: 0.2 },
                 }}
                 whileTap={{scale: 0.9}}
-                onClick={() => {}}
+                onClick={() => {
+                  fetch(`/api/verify/${id}`, {
+                    method: 'POST'
+                  }).then(() => window.location.reload())
+                }}
                 >
                   Verify
                 </motion.button>
