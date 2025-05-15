@@ -2,7 +2,7 @@ import { AnchorProvider, Program, Wallet, web3 } from "@coral-xyz/anchor/dist/cj
 import { Connection, Keypair, PublicKey } from "@solana/web3.js";
 import idl from "../idl/symptom_net.json"
 import { SymptomNetContract } from "../types/symptomNet"
-import { TOKEN_PROGRAM_ID } from "@solana/spl-token";
+import { getOrCreateAssociatedTokenAccount, TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import { BN } from "bn.js";
 import user from "../model/user";
 
@@ -99,7 +99,7 @@ export default class Blockchain {
                 'code': 404
             }
         }
-        
+
         const [recordPda] = PublicKey.findProgramAddressSync(
             [
                 Buffer.from("record"), 
@@ -108,7 +108,7 @@ export default class Blockchain {
             ],
             this.programId
         );
-        
+    
         const submitterPublicKey = record.submitter
         this.verifyRecordBC(doctorWallet, submitterPublicKey, recordPda)        
         return {
@@ -116,7 +116,7 @@ export default class Blockchain {
         }
     }
 
-    async verifyRecordBC(doctorWallet, submitterPublicKey, recordPda) {
+    async verifyRecordBC(doctorWallet: Keypair, submitterPublicKey, recordPda) {
         const program = this.getProgram(doctorWallet);
         
         // Derive PDAs
@@ -140,16 +140,30 @@ export default class Blockchain {
             this.programId
         );
         
-        const [doctorTokenAccountPda] = PublicKey.findProgramAddressSync(
-            [Buffer.from("doctor-token"), doctorWallet.publicKey.toBuffer()],
-            this.programId
-        );
+        // const [doctorTokenAccountPda] = PublicKey.findProgramAddressSync(
+        //     [Buffer.from("doctor-token"), doctorWallet.publicKey.toBuffer()],
+        //     this.programId
+        // );
         
-        const [submitterTokenAccountPda] = PublicKey.findProgramAddressSync(
-            [Buffer.from("doctor-token"), submitterPublicKey.toBuffer()],
-            this.programId
-        );
-        
+        // const [submitterTokenAccountPda] = PublicKey.findProgramAddressSync(
+        //     [Buffer.from("doctor-token"), submitterPublicKey.toBuffer()],
+        //     this.programId
+        // );
+
+        const doctorTokenAccount = await getOrCreateAssociatedTokenAccount(
+            this.connection,
+            this.adminWallet,
+            tokenMintPda,
+            doctorWallet.publicKey
+        )
+
+        const submitterTokenAccount = await getOrCreateAssociatedTokenAccount(
+            this.connection,
+            this.adminWallet,
+            tokenMintPda,
+            submitterPublicKey
+        )
+
         try {
             await program.methods
             .verifyRecord()
@@ -160,8 +174,10 @@ export default class Blockchain {
                 record: recordPda,
                 state: statePda,
                 tokenMint: tokenMintPda,
-                doctorTokenAccount: doctorTokenAccountPda,
-                submitterTokenAccount: submitterTokenAccountPda,
+                // doctorTokenAccount: doctorTokenAccountPda,
+                // submitterTokenAccount: submitterTokenAccountPda,
+                doctorTokenAccount: doctorTokenAccount.address,
+                submitterTokenAccount: submitterTokenAccount.address,
                 tokenProgram: TOKEN_PROGRAM_ID,
             })
             .signers([doctorWallet])

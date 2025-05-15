@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "motion/react"
 
 import Sidebar from "../../components/Sidebar";
@@ -32,35 +32,54 @@ function RecordEntry({ date, illness, verify_percentage, status}) {
 function RecordTable() {
 
   const [records, setRecords] = useState([
-    {
-      id: 1,
-      date: new Date(),
-      illness: 'Covid-19',
-      verify_percentage: 50,
-      status: 'Pending',
-    },
-    {
-      id: 2,
-      date: new Date(new Date().getTime() - 3600000), // 1 hour ago
-      illness: 'Flu',
-      verify_percentage: 70,
-      status: 'Verified',
-    },
-    {
-      id: 3,
-      date: new Date(new Date().getTime() - 7200000), // 2 hours ago
-      illness: 'Chickenpox',
-      verify_percentage: 90,
-      status: 'Rejected',
-    },
-    {
-      id: 4,
-      date: new Date(new Date().getTime() - 10800000), // 3 hours ago
-      illness: 'Diabetes',
-      verify_percentage: 40,
-      status: 'Pending',
-    }
+    // {
+    //   id: 1,
+    //   date: new Date(),
+    //   illness: 'Covid-19',
+    //   verify_percentage: 50,
+    //   status: 'Pending',
+    // },
+    // {
+    //   id: 2,
+    //   date: new Date(new Date().getTime() - 3600000), // 1 hour ago
+    //   illness: 'Flu',
+    //   verify_percentage: 70,
+    //   status: 'Verified',
+    // },
+    // {
+    //   id: 3,
+    //   date: new Date(new Date().getTime() - 7200000), // 2 hours ago
+    //   illness: 'Chickenpox',
+    //   verify_percentage: 90,
+    //   status: 'Rejected',
+    // },
+    // {
+    //   id: 4,
+    //   date: new Date(new Date().getTime() - 10800000), // 3 hours ago
+    //   illness: 'Diabetes',
+    //   verify_percentage: 40,
+    //   status: 'Pending',
+    // }
   ])
+
+  function capitalize(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  useEffect(() => {
+    fetch('/api/record')
+    .then((e) => e.json())
+    .then((vals) => {
+      const stuff = vals.map((x) => ({
+        id: Number(x.id),
+        date:  new Date(new Date().getTime() - 7200000), // dawg we forgot to store date
+        illness: x.sickness,
+        verify_percentage: Math.round((Number(x.verificationCount) / 3)),
+        status: capitalize(x.status)
+      }))
+      setRecords(stuff)
+    })
+  }, [])
 
   return (
     <div className="flex flex-col w-full h-full justify-between">
