@@ -1,10 +1,150 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { motion } from "motion/react"
+import { motion, AnimatePresence } from "motion/react"
 
 import Sidebar from "../../components/Sidebar";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Plus, X } from "lucide-react";
+
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { DatePicker } from "@/components/DatePicker";
+import SymptomBox from "@/components/SymptomBox";
+
+
+function AddRecordDialog({ onOpenChange }) {
+
+  const [admissionDate, setAdmissionDate] = useState(new Date());
+  const [dischargeDate, setDischargeDate] = useState(new Date());
+  const [symptoms, setSymptoms] = useState([])
+
+  const deleteSymptom = (id) => () => setSymptoms(symptoms => symptoms.filter(s => s.id !== id));
+
+  const addSymptom = () => setSymptoms([...symptoms, { id: crypto.randomUUID(), text: "" }])
+
+  const updateSymptomText = (id) => (text) => setSymptoms(symptoms => symptoms.map(s => 
+    s.id === id ? { ...s, text: text } : s
+  ));
+
+  return (
+    <Dialog onOpenChange={onOpenChange}>
+      <DialogTrigger>
+        <motion.div className="flex h-10 w-18 rounded-xl text-black font-bold
+        bg-[#8de9ad] justify-center items-center"
+        whileHover={{
+        scale: 1.1,
+        boxShadow: "0 0px 30px rgba(22, 101, 52, 0.5)",
+        transition: { duration: 0.2 },
+        }}
+        whileTap={{scale: 0.9}}
+        onClick={() => {}}
+        >
+          New
+        </motion.div>
+      </DialogTrigger>
+      <DialogContent className="flex flex-col min-w-5/6 justify-center items-center
+      space-y-2 bg-[#111814] text-white border-0 [&>button]:hidden">
+        <DialogHeader>
+          <DialogTitle className="font-bold text-4xl pt-5">New Record</DialogTitle>
+        </DialogHeader>
+        <div className="flex flex-row w-full justify-evenly">
+          <div className="space-y-5">
+            <div className="text-xl font-semibold">Patient Details</div>
+            <div className="space-y-1">
+              <div className="text-lg pl-2">Age</div>
+              <input className="bg-white/5 text-black w-96 h-12 p-5 rounded-lg inset-shadow-sm"/>
+            </div>
+            <div className="space-y-1">
+              <div className="text-lg pl-2">Gender</div>
+              <input className="bg-white/5 text-black w-96 h-12 p-5 rounded-lg inset-shadow-sm"/>
+            </div>
+            <div className="space-y-1">
+              <div className="text-lg pl-2">Race</div>
+              <input className="bg-white/5 text-black w-96 h-12 p-5 rounded-lg inset-shadow-sm"/>
+            </div>
+            <div className="space-y-1">
+              <div className="text-lg pl-2">Country</div>
+              <input className="bg-white/5 text-black w-96 h-12 p-5 rounded-lg inset-shadow-sm"/>
+            </div>
+            <div className="space-y-1">
+              <div className="text-lg pl-2">Date Admitted</div>
+              <DatePicker date={admissionDate} setDate={setAdmissionDate}/>
+            </div>
+            <div className="space-y-1">
+              <div className="text-lg pl-2">Date Discharged</div>
+              <DatePicker date={dischargeDate} setDate={setDischargeDate}/>
+            </div>
+          </div>
+          <div className="space-y-5">
+            <div className="text-xl font-semibold">Illness Details</div>
+            <div className="space-y-1">
+              <div className="text-lg pl-2">Diagnosis</div>
+              <input className="bg-white/5 text-black w-96 h-12 p-5 rounded-lg inset-shadow-sm"/>
+            </div>
+            <div className="space-y-1">
+              <div className="flex flex-row justify-between pb-2">
+                <div className="text-lg pl-2">Symptoms</div>
+                <motion.div className="flex h-8 w-8 rounded-lg text-black 
+              bg-[#8de9ad] justify-center items-center"
+                whileHover={{
+                scale: 1.1,
+                boxShadow: "0 0px 30px rgba(22, 101, 52, 0.5)",
+                transition: { duration: 0.2 },
+                }}
+                whileTap={{scale: 0.9}}
+                onClick={addSymptom}
+                >
+                  <Plus className="text-black"/>
+                </motion.div>
+              </div>
+              <div className="flex flex-col max-h-full space-y-5 py-5">
+                <AnimatePresence mode="sync">
+                  {
+                    symptoms.map((s) => <SymptomBox key={s.id} text={s.text} onDelete={deleteSymptom(s.id)} onChange={updateSymptomText(s.id)}/>)
+                  }
+                </AnimatePresence>
+              </div>
+            </div>
+          </div>
+          <div className="space-y-5">
+            <div className="text-xl font-semibold">Hospital Details</div>
+            <div className="space-y-1">
+              <div className="text-lg pl-2">Hospital Name</div>
+              <input className="bg-white/5 text-black w-96 h-12 p-5 rounded-lg inset-shadow-sm"/>
+            </div>
+            <div className="space-y-1">
+              <div className="text-lg pl-2">State</div>
+              <input className="bg-white/5 text-black w-96 h-12 p-5 rounded-lg inset-shadow-sm"/>
+            </div>
+            <div className="space-y-1">
+              <div className="text-lg pl-2">Country</div>
+              <input className="bg-white/5 text-black w-96 h-12 p-5 rounded-lg inset-shadow-sm"/>
+            </div>
+          </div>
+
+
+        </div>
+        <motion.div className="flex h-12 w-32 rounded-xl text-black font-semibold
+        bg-[#8de9ad] justify-center items-center text-2xl"
+        whileHover={{
+        scale: 1.1,
+        boxShadow: "0 0px 30px rgba(22, 101, 52, 0.5)",
+        transition: { duration: 0.2 },
+        }}
+        whileTap={{scale: 0.9}}
+        onClick={() => {}}
+        >
+          Add
+        </motion.div>
+      </DialogContent>
+    </Dialog>
+  );
+}
 
 function RecordEntry({ date, illness, verify_percentage, status}) {
 
@@ -27,7 +167,6 @@ function RecordEntry({ date, illness, verify_percentage, status}) {
   );
 
 }
-
 
 function RecordTable() {
 
@@ -82,7 +221,7 @@ function RecordTable() {
   }, [])
 
   return (
-    <div className="flex flex-col w-full h-full justify-between">
+    <div className="flex flex-col w-full h-full justify-between text-white">
       <div className="w-full h-172 p-5 bg-white/5 rounded-xl justify-between">
         <div className="flex flex-col w-full h-full justify-start">
           <div className="grid grid-cols-5 place-items-center">
@@ -142,22 +281,11 @@ export default function Dashboard() {
     justify-center items-center">
       <div className="flex flex-row p-5 space-x-5 w-full h-[95%] items-center">
         <Sidebar />
-        <div className="flex flex-row w-full h-full space-x-5">
+        <div className="flex flex-row w-full h-full space-x-5 text-white">
           <div className="flex flex-col w-full h-full px-5">
             <div className="flex flex-row justify-between items-start w-full pt-2">
               <div className="font-bold text-4xl">Records</div>
-              <motion.button className="h-10 w-18 rounded-xl text-black font-bold
-              bg-[#8de9ad]"
-              whileHover={{
-              scale: 1.1,
-              boxShadow: "0 0px 30px rgba(22, 101, 52, 0.5)",
-              transition: { duration: 0.2 },
-              }}
-              whileTap={{scale: 0.9}}
-              onClick={() => {}}
-              >
-                New
-              </motion.button>
+              <AddRecordDialog onOpenChange={() => {}}/>
             </div>
             <div className="py-4">Make an anonymous record of your patients' illnesses to the mainnet.</div>
             <RecordTable />
