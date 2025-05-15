@@ -1,7 +1,6 @@
 "use client"
 
-import { Type, X } from "lucide-react";
-import { motion, AnimatePresence, hover } from "motion/react"
+import { motion, AnimatePresence } from "motion/react"
 import Sidebar from "@/components/Sidebar";
 import { use, useEffect, useState } from "react";
 import useMeasure from "react-use-measure";
@@ -61,36 +60,7 @@ function ResultBox({ text , rank, treatment_steps }) {
 }
 
 
-function SymptomBox({ text, onDelete, onChange }) {
-  return (
-    <motion.div className="relative flex items-center justify-start px-2 py-3
-    w-full min-h-28 bg-white/5 rounded-xl"
-    layout
-    initial={{
-      opacity: 0,
-      translateX: -200,
-    }}
-    animate={{
-      opacity: 1,
-      translateX: 0,
-    }}
-    exit={{
-      opacity: 0,
-    }}
-    >
-      <textarea className="w-[80%] min-h-22 h-full text-white p-2 focus:outline-none"
-      defaultValue={text}
-      placeholder="My patient is..."
-      onChange={(e) => onChange(e.target.value)}
-      ></textarea>
-      <div className="absolute top-3 right-3 cursor-pointer hover:rotate-180 transition-all"
-      onClick={onDelete}
-      >
-        <X color="red" size={35} className=" "/>
-      </div>
-    </motion.div>
-  );
-}
+
 
 export default function Diagnose() {
 
@@ -146,7 +116,7 @@ export default function Diagnose() {
   justify-center items-center">
     <div className="flex flex-row p-5 space-x-5 w-full h-[95%] items-center">
     <Sidebar />
-    <div className="flex flex-row w-full h-full space-x-5">
+    <div className="flex flex-row w-full h-full space-x-5 text-white">
       <div className="flex flex-col w-1/2 px-5 justify-between">
         <div className="flex flex-col w-full h-full justify-start">
           <div className="flex flex-row justify-between items-start w-full pt-2">
@@ -176,13 +146,14 @@ export default function Diagnose() {
 
       <motion.button className="h-16 w-full rounded-xl text-black font-bold text-2xl
         bg-[#8de9ad]"
-      whileHover={{
+      whileHover={symptoms.length === 0 ? {} : {
       scale: 1.05,
       boxShadow: "0 0px 30px rgba(22, 101, 52, 0.5)",
       transition: { duration: 0.2 },
       }}
       whileTap={{scale: 0.9}}
       onClick={getResults}
+      disabled={symptoms.length === 0}
       >
         Diagnose
       </motion.button>
