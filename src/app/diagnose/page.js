@@ -60,22 +60,21 @@ function ResultBox({ text , rank, treatment_steps }) {
   )
 }
 
-
-
-
-export default function Diagnose() {
-
-  const [symptoms, setSymptoms] = useState([]);
-  const [results, setResults] = useState([
-    { id: 0, rank: 1, text: 'Common Rash', treatment_steps: [
+const example1 = { id: 0, rank: 1, text: 'Common Rash', treatment_steps: [
       "Conduct a visual examination to identify the rash's appearance, distribution, and any associated skin changes.",
       "Gather information about the patient's medical history, including allergies, medications, and previous skin conditions.",
       "Inquire about potential exposures to irritants, allergens, or infectious agents.",
       "Assess for accompanying symptoms such as itching, pain, fever, or systemic illness.",
       "Perform diagnostic tests, such as skin scrapings, cultures, or biopsies, if necessary, to rule out specific infections or conditions.",
       "Consider less common conditions based on your findings."
-    ]},
-    { id: 1, rank: 2, text: 'brain problem' , treatment_steps: ['baba']}
+    ]}
+const example2 = { id: 1, rank: 2, text: 'brain problem' , treatment_steps: ['baba']}
+
+export default function Diagnose() {
+
+  const [symptoms, setSymptoms] = useState([]);
+  const [results, setResults] = useState([
+
   ]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -86,7 +85,7 @@ export default function Diagnose() {
   const updateSymptomText = (id) => (text) => setSymptoms(symptoms => symptoms.map(s => 
     s.id === id ? { ...s, text: text } : s
   ));
-  
+
   const getResults = () => {
 
     setIsLoading(true);
