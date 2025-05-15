@@ -22,6 +22,7 @@ export default class Blockchain {
 
         this.programId = new PublicKey(SYMPTOM_NET_ADDRESS)
         this.connection = new Connection("https://api.devnet.solana.com", "confirmed");
+        // this.connection = new Connection("https://api.devnet.solana.rpcpool.com", "confirmed");
         this.adminWallet = Keypair.fromSecretKey(Uint8Array.from(JSON.parse(ADMIN_WALLET)))
         this.instance = this
     }
@@ -332,8 +333,13 @@ export default class Blockchain {
     async getUnverifiedRecords(userWallet: Keypair) {
         const data = await this.fetchAllSymptomRecords(userWallet)
 
-        const otherData = data.filter((value) =>
+        var otherData = data.filter((value) =>
             !userWallet.publicKey.equals(value.submitter))
+        otherData = otherData.filter((value) =>
+            !userWallet.publicKey.equals(value.verifier1) &&
+            !userWallet.publicKey.equals(value.verifier2) &&
+            !userWallet.publicKey.equals(value.verifier3)
+        )
         if (otherData.length === 0)
             return true
         return otherData[Math.floor(Math.random() * otherData.length)]
