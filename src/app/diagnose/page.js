@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "motion/react"
 import Sidebar from "@/components/Sidebar";
 import { use, useEffect, useState } from "react";
 import useMeasure from "react-use-measure";
+import SymptomBox from "@/components/SymptomBox";
 
 function ResultBox({ text , rank, treatment_steps }) {
 
@@ -85,7 +86,7 @@ export default function Diagnose() {
   const updateSymptomText = (id) => (text) => setSymptoms(symptoms => symptoms.map(s => 
     s.id === id ? { ...s, text: text } : s
   ));
-
+  
   const getResults = () => {
 
     setIsLoading(true);
@@ -101,15 +102,37 @@ export default function Diagnose() {
       })
     }).then((response) => {
       if (response.ok)
-        response.json().then((json) => {
+        return response.json().then((json) => {
           console.log(json.result)
-          setResults(json.result.map((r, i) => ({id: crypto.randomUUID(), rank: i + 1, text: r, treatment_steps: ['None']})))
-          setIsLoading(false)
+          return Promise.all(
+            json.result.map((r, i) => {
+              return fetch('https://a316-202-171-178-0.ngrok-free.app/gemini-predict', {
+                method: 'POST',
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                  Message: `How should i diagnose ${r}?`
+                })
+              }).then((response => {
+                if (response.ok)
+                  return response.json().then((json) => ({
+                    id: crypto.randomUUID(),
+                    rank: i + 1,
+                    text: r,
+                    treatment_steps: JSON.parse(json.result)
+                  }))
+              })).catch((e) => console.error(e))
+          }))
         })
+    }).then((arr) => {
+      setResults(arr)
+      setIsLoading(false)
     }).catch((error) => {
       console.error(error)
     })
   }
+
 
   return (
   <div className="flex flex-col h-screen w-screen bg-[#040c07]
@@ -175,7 +198,6 @@ export default function Diagnose() {
           isLoading === false && results.length > 0 && <div className="flex flex-col max-h-full space-y-5 py-5">
             <AnimatePresence mode="sync">
               {
-                
                 results.map((r, i) => <ResultBox key={r.id} text={r.text}
                 rank={r.rank} treatment_steps={r.treatment_steps}/>)
               }
