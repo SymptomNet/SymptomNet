@@ -117,7 +117,7 @@ export default class Blockchain {
     }
 
     async verifyRecordBC(doctorWallet: Keypair, submitterPublicKey, recordPda) {
-        const program = this.getProgram(doctorWallet);
+        const program = this.getProgram(this.adminWallet);
         
         // Derive PDAs
         const [statePda] = PublicKey.findProgramAddressSync(

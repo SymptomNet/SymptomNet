@@ -74,7 +74,7 @@ function RecordTable() {
         id: Number(x.id),
         date:  new Date(new Date().getTime() - 7200000), // dawg we forgot to store date
         illness: x.sickness,
-        verify_percentage: Math.round((Number(x.verificationCount) / 3)),
+        verify_percentage: Math.round((Number(x.verificationCount) / 3) * 100),
         status: capitalize(x.status)
       }))
       setRecords(stuff)

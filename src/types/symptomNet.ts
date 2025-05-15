@@ -385,6 +385,44 @@ export type SymptomNetContract = {
       "args": []
     },
     {
+      "name": "mintTokens",
+      "discriminator": [
+        59,
+        132,
+        24,
+        246,
+        122,
+        39,
+        8,
+        243
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "tokenMint",
+          "writable": true
+        },
+        {
+          "name": "recipient",
+          "writable": true
+        },
+        {
+          "name": "tokenProgram",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
       "name": "registerDoctor",
       "discriminator": [
         181,
@@ -604,6 +642,11 @@ export type SymptomNetContract = {
       "accounts": [
         {
           "name": "doctor",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "authority",
           "writable": true,
           "signer": true
         },

@@ -379,6 +379,44 @@
       "args": []
     },
     {
+      "name": "mint_tokens",
+      "discriminator": [
+        59,
+        132,
+        24,
+        246,
+        122,
+        39,
+        8,
+        243
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "token_mint",
+          "writable": true
+        },
+        {
+          "name": "recipient",
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
       "name": "register_doctor",
       "discriminator": [
         181,
@@ -598,6 +636,11 @@
       "accounts": [
         {
           "name": "doctor",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "authority",
           "writable": true,
           "signer": true
         },
